@@ -8,11 +8,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Coder_Journal
-{
-
-	public partial class _Default
-	{
-		protected System.Web.UI.HtmlControls.HtmlForm form1;
-	}
+namespace CoderJournal.Modules.Journal {
+    
+    public partial class List {
+        protected CoderJournal.Modules.Journal.Controls.Journal journal;
+    }
 }
