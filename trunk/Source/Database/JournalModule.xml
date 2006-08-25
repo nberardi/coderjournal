@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<codeSmith>
+	<propertySet>
+		<property name="GenerateStoredProcedures">True</property>
+		<property name="GenerateTables">True</property>
+		<property name="GenerateViews">False</property>
+		<property name="ConnectionStringName">ManagedFusion</property>
+		<property name="Namespace">CoderJournal.Modules.Journal.Data</property>
+		<property name="CompanyName">Coder Journal</property>
+		<property name="CompanyUrl">http://www.coderjournal.com</property>
+		<property name="InsertUpdateSuffix" />
+		<property name="DeleteSuffix">_Delete</property>
+		<property name="ProcedurePrefix" />
+		<property name="OutputDirectory">M:\Users\Nick\Projects\Coder Journal\Source\Website\Modules\Journal\Data</property>
+		<property name="SqlOutputDirectory">M:\Users\Nick\Projects\Coder Journal\Source\Database\Stored Procedures</property>
+		<property name="SourceTables">
+			<connectionString>Data Source=(local);Initial Catalog=CoderJournal;Integrated Security=true;Connection Timeout=1;</connectionString>
+			<providerType>SchemaExplorer.SqlSchemaProvider,SchemaExplorer.SqlSchemaProvider</providerType>
+			<tableList>
+				<table>
+					<owner>dbo</owner>
+					<name>Journal</name>
+				</table>
+				<table>
+					<owner>dbo</owner>
+					<name>JournalTagLink</name>
+				</table>
+				<table>
+					<owner>dbo</owner>
+					<name>JournalUserLink</name>
+				</table>
+				<table>
+					<owner>dbo</owner>
+					<name>Link</name>
+				</table>
+				<table>
+					<owner>dbo</owner>
+					<name>Tag</name>
+				</table>
+				<table>
+					<owner>dbo</owner>
+					<name>User</name>
+				</table>
+			</tableList>
+		</property>
+	</propertySet>
+</codeSmith>

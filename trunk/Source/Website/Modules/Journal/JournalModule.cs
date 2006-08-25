@@ -9,6 +9,7 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 
 using ManagedFusion.Modules;
+using ManagedFusion.Syndication;
 
 namespace CoderJournal.Modules.Journal
 {
@@ -33,9 +34,19 @@ namespace CoderJournal.Modules.Journal
 				&& Int32.TryParse(daysToGetString, out daysToGet) == false
 				&& daysToGetString.ToLower() == "all")
 			{
-				daysToGet = Int32.MaxValue;
+				daysToGet = -1;
 			}
 
+			// set the sitemap properites
+			e.Syndication.ChangeFrequency = ChangeFrequency.Daily;
+			e.Syndication.Priority = 1.0F;
+
+			// add links for the site
+			e.Syndication.Links.Add(new Link(new Uri(this.SectionInformation.UrlPath.ToString() + "?feed"), "Coder Journal Atom Feed", LinkRelationship.Self, "application/atom+xml"));
+			e.Syndication.Links.Add(new Link(this.SectionInformation.UrlPath, "Coder Journal", LinkRelationship.Alternate, "text/html"));
+
+			// fill the feed
+			Data.Journal.FillFeed(e.Syndication, daysToGet);
 
 			base.OnLoadSyndication(e);
 		}

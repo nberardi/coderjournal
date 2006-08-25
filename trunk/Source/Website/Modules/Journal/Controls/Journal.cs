@@ -11,19 +11,18 @@ using ManagedFusion;
 using ManagedFusion.Modules;
 using ManagedFusion.Syndication;
 
+using CoderJournal.Modules.Journal.Controls.Design;
+
 namespace CoderJournal.Modules.Journal.Controls
 {
 	[
 		ToolboxData(@"<{0}:Journal runat=""server"" />"),
+		Designer(typeof(JournalDesigner)),
 		AspNetHostingPermission(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal),
 		AspNetHostingPermission(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)
 	]
 	public class Journal : Control
 	{
-		public Journal()
-		{
-		}
-
 		public List<Entry> Entries
 		{
 			get { return this.Module.Syndication.Items; }
@@ -134,6 +133,7 @@ namespace CoderJournal.Modules.Journal.Controls
 				writer.RenderBeginTag(HtmlTextWriterTag.A);
 				writer.Write(category.Label);
 				writer.RenderEndTag();
+				writer.Write(" ");
 			}
 			writer.WriteLine();
 
@@ -262,6 +262,9 @@ namespace CoderJournal.Modules.Journal.Controls
 			writer.AddAttribute(HtmlTextWriterAttribute.Class, "post-divider");
 			writer.RenderBeginTag(HtmlTextWriterTag.Hr);
 			writer.RenderEndTag();
+
+			writer.WriteLine();
+			writer.WriteLine();
 		}
 	}
 }
