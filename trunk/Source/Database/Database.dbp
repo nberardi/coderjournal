@@ -1,0 +1,21 @@
+# Microsoft Developer Studio Project File - Database Project
+Begin DataProject = "Database"
+   MSDTVersion = "80"
+   DefDBRef = "livingroom.CoderJournal.dbo"
+   Begin DBRefFolder = "Database References"
+      Begin DBRefNode = "livingroom.CoderJournal.dbo"
+         ConnectStr = "Data Source=LIVINGROOM;Initial Catalog=CoderJournal;Integrated Security=True"
+         Provider = "{91510608-8809-4020-8897-FBA057E22D54}"
+         Colorizer = 6
+      End
+   End
+   Begin Folder = "Stored Procedures"
+      Script = "GetPagedJournal.sql"
+      Script = "Journal.sql"
+      Script = "JournalTagLink.sql"
+      Script = "JournalUserLink.sql"
+      Script = "Link.sql"
+      Script = "Tag.sql"
+      Script = "User.sql"
+   End
+End

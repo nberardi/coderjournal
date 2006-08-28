@@ -72,6 +72,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Security\JournalMembershipProvider.cs" />
+    <Compile Include="Security\JournalRoleProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="CoderJournal.snk" />
@@ -83,6 +85,10 @@
     <Content Include="Modules\Journal\Module.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\ManagedFusion\Source\Databases\SqlServer2000\Provider\ManagedFusion-SqlServer2000.csproj">
+      <Project>{8EBE53E5-A163-43B9-8DE8-E5E88BDEB071}</Project>
+      <Name>ManagedFusion-SqlServer2000</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\ManagedFusion\Source\ManagedFusion\ManagedFusion.csproj">
       <Project>{F26CF465-ECA9-43CB-AB25-7EC557CFA0CE}</Project>
       <Name>ManagedFusion</Name>
@@ -106,7 +112,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>4142</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

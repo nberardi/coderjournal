@@ -10,7 +10,7 @@
 		<property name="CompanyUrl">http://www.coderjournal.com</property>
 		<property name="InsertUpdateSuffix" />
 		<property name="DeleteSuffix">_Delete</property>
-		<property name="ProcedurePrefix" />
+		<property name="ProcedurePrefix">Journal_</property>
 		<property name="OutputDirectory">M:\Users\Nick\Projects\Coder Journal\Source\Website\Modules\Journal\Data</property>
 		<property name="SqlOutputDirectory">M:\Users\Nick\Projects\Coder Journal\Source\Database\Stored Procedures</property>
 		<property name="SourceTables">

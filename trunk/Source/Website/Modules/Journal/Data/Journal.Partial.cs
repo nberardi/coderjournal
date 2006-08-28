@@ -15,17 +15,31 @@ namespace CoderJournal.Modules.Journal.Data
 {
 	public partial class Journal
 	{
-		public static void FillFeed(Feed feed, int days)
+		protected static Uri GetPostUrl(DateTime publishDate, string urlName)
 		{
-			JournalCollection entries;
+			return ManagedFusion.Common.Path.GetPortalUrl(String.Format("/{0}/{1}/{2}.aspx", publishDate.Year, publishDate.Month, urlName));
+		}
 
-			// if days is -1 it means that every entry in the database should be retreived
-			if (days == -1)
-				entries = Journal.GetList();
-			else
-				entries = Journal.GetList("Publish >= '" + DateTime.Today.AddDays(days * -1D).ToShortDateString() + "'");
+		public static JournalCollection GetListByPage(int currentPage, int pageSize)
+		{
+			using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ManagedFusion"].ConnectionString))
+			{
+				using (SqlCommand command = connection.CreateCommand())
+				{
+					command.CommandText = "GetPagedJournal";
+					command.CommandType = CommandType.StoredProcedure;
 
-			foreach (Journal entry in entries)
+					command.Parameters.AddWithValue("@CurrentPage", currentPage);
+					command.Parameters.AddWithValue("@PageSize", pageSize);
+
+					return FillCollection(command);
+				}
+			}
+		}
+
+		public static void FillFeed(Feed feed, int currentPage, int pageSize)
+		{
+			foreach (Journal entry in GetListByPage(currentPage, pageSize))
 			{
 				Entry e = new Entry(
 					entry.Title,
@@ -37,7 +51,7 @@ namespace CoderJournal.Modules.Journal.Data
 				e.Published = entry.Published;
 
 				// the self link is added by default
-				e.Links.Add(new ManagedFusion.Syndication.Link(new Uri(""), entry.Title, LinkRelationship.Self, "html"));
+				e.Links.Add(new ManagedFusion.Syndication.Link(GetPostUrl(entry.Published, entry.UrlName), entry.Title, LinkRelationship.Self, "html"));
 
 				// add the links
 				foreach (Link link in entry.ForeignLinks)
@@ -71,7 +85,7 @@ namespace CoderJournal.Modules.Journal.Data
 				}
 
 				// add the entry
-				entries.Add(entry);
+				feed.Items.Add(e);
 			}
 		}
 

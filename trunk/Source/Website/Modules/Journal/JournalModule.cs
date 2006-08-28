@@ -24,17 +24,24 @@ namespace CoderJournal.Modules.Journal
 	{
 		protected override void OnLoadSyndication(LoadSyndicationEventArgs e)
 		{
-			string daysToGetString = Context.Request.QueryString["days"];
-			int daysToGet = 3;
+			string currentPageString = Context.Request.QueryString["p"];
+			string pageSizeString = Context.Request.QueryString["s"];
 
-			// this statement does three things, first it checks to see if there was a value in the query string
-			// second it validates and sets the int if it is a valid int
-			// third it checks to see if "all" is set so that it returns the whole journal database
-			if (String.IsNullOrEmpty(daysToGetString) == false
-				&& Int32.TryParse(daysToGetString, out daysToGet) == false
-				&& daysToGetString.ToLower() == "all")
+			int currentPage = 0;
+			int pageSize = 10;
+
+			if (Int32.TryParse(currentPageString, out currentPage) == false)
+				currentPage = 0;
+
+			if (Int32.TryParse(pageSizeString, out pageSize) == false)
+				pageSize = 10;
+
+			// this statment checks to see if a sitemap request is being made and if one is
+			// it returns all contents in the database
+			if (Context.Request.Url.Query.StartsWith("?sitemap"))
 			{
-				daysToGet = -1;
+				currentPage = 0;
+				pageSize = Int32.MaxValue;
 			}
 
 			// set the sitemap properites
@@ -46,7 +53,7 @@ namespace CoderJournal.Modules.Journal
 			e.Syndication.Links.Add(new Link(this.SectionInformation.UrlPath, "Coder Journal", LinkRelationship.Alternate, "text/html"));
 
 			// fill the feed
-			Data.Journal.FillFeed(e.Syndication, daysToGet);
+			Data.Journal.FillFeed(e.Syndication, currentPage, pageSize);
 
 			base.OnLoadSyndication(e);
 		}
