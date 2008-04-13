@@ -7,19 +7,8 @@ namespace System.Web
 	/// <summary>
 	/// 
 	/// </summary>
-	public static class HttpResponseExtensions
+	public static class WebExtensions
 	{
-		/// <summary>
-		/// Redirects the specified response.
-		/// </summary>
-		/// <param name="response">The response.</param>
-		/// <param name="responseCode">The response code.</param>
-		/// <param name="url">The URL.</param>
-		public static void Redirect(this HttpResponseBase response, HttpStatusCode responseCode, string url)
-		{
-			Redirect(HttpContext.Current.Response, (int)responseCode, url);
-		}
-
 		/// <summary>
 		/// Redirects the specified response.
 		/// </summary>
@@ -29,17 +18,6 @@ namespace System.Web
 		public static void Redirect(this HttpResponseBase response, int responseCode, string url)
 		{
 			Redirect(HttpContext.Current.Response, responseCode, url);
-		}
-
-		/// <summary>
-		/// Redirects the specified response.
-		/// </summary>
-		/// <param name="response">The response.</param>
-		/// <param name="responseCode">The response code.</param>
-		/// <param name="url">The URL.</param>
-		public static void Redirect(this HttpResponse response, HttpStatusCode responseCode, string url)
-		{
-			Redirect(response, (int)responseCode, url);
 		}
 
 		/// <summary>
@@ -83,13 +61,12 @@ namespace System.Web
 					goto case 302;
 			}
 
-			response.ContentType = "text/html";
 			response.RedirectLocation = url;
 
-			response.Write("<html><head><title>" + response.StatusDescription + "</title></head><body>");
-			response.Write("<h2>" + response.StatusDescription + " to <a href=\"" + HttpUtility.HtmlAttributeEncode(url) + "\">here</a>.</h2>");
+			response.ContentType = "text/html";
+			response.Write("<html><head><title>Object Moved</title></head><body>");
+			response.Write("<h2>Object moved to <a href=\"" + HttpUtility.HtmlAttributeEncode(url) + "\">here</a>.</h2>");
 			response.Write("</body></html>");
-			response.Flush();
 
 			response.End();
 		}
