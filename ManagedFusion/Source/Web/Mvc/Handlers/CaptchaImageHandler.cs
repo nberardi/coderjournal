@@ -1,29 +1,11 @@
-﻿/** 
- * Copyright (C) 2007-2008 Nicholas Berardi, Managed Fusion, LLC (nick@managedfusion.com)
- * 
- * <author>Nicholas Berardi</author>
- * <author_email>nick@managedfusion.com</author_email>
- * <company>Managed Fusion, LLC</company>
- * <product>ASP.NET MVC CAPTCHA</product>
- * <license>Microsoft Public License (Ms-PL)</license>
- * <agreement>
- * This software, as defined above in <product />, is copyrighted by the <author /> and the <company /> 
- * and is licensed for use under <license />, all defined above.
- * 
- * This copyright notice may not be removed and if this <product /> or any parts of it are used any other
- * packaged software, attribution needs to be given to the author, <author />.  This can be in the form of a textual
- * message at program startup or in documentation (online or textual) provided with the packaged software.
- * </agreement>
- */
-
-using System;
+﻿using System;
 using System.Web;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-using ManagedFusion.Web.Controls;
+using  ManagedFusion.Web.Mvc.Controls;
 
-namespace ManagedFusion.Web.Handlers
+namespace ManagedFusion.Web.Mvc.Handlers
 {
 	/// <summary>
 	/// Captcha image stream HttpModule. Retrieves CAPTCHA objects from cache, renders them to memory, 
@@ -53,7 +35,7 @@ namespace ManagedFusion.Web.Handlers
 		/// <summary>
 		/// Enables processing of HTTP Web requests by a custom HttpHandler that implements the <see cref="T:System.Web.IHttpHandler"/> interface.
 		/// </summary>
-		/// <param name="context">An <see cref="T:System.Web.HttpContext"/> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests.</param>
+		/// <param name="filterContext">An <see cref="T:System.Web.HttpContext"/> object that provides references to the intrinsic server objects (for example, Request, Response, Session, and Server) used to service HTTP requests.</param>
 		public void ProcessRequest(HttpContext context)
 		{
 			// get the unique GUID of the captcha; this must be passed in via the querystring
@@ -74,7 +56,7 @@ namespace ManagedFusion.Web.Handlers
 				b.Save(context.Response.OutputStream, ImageFormat.Gif);
 			}
 
-			context.Response.ContentType = "image/png";
+			context.Response.ContentType = "image/gif";
 			context.Response.StatusCode = 200;
 			context.Response.StatusDescription = "OK";
 			context.ApplicationInstance.CompleteRequest();

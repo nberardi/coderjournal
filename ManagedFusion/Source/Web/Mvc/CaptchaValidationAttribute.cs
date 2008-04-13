@@ -1,30 +1,12 @@
-﻿/** 
- * Copyright (C) 2007-2008 Nicholas Berardi, Managed Fusion, LLC (nick@managedfusion.com)
- * 
- * <author>Nicholas Berardi</author>
- * <author_email>nick@managedfusion.com</author_email>
- * <company>Managed Fusion, LLC</company>
- * <product>ASP.NET MVC CAPTCHA</product>
- * <license>Microsoft Public License (Ms-PL)</license>
- * <agreement>
- * This software, as defined above in <product />, is copyrighted by the <author /> and the <company /> 
- * and is licensed for use under <license />, all defined above.
- * 
- * This copyright notice may not be removed and if this <product /> or any parts of it are used any other
- * packaged software, attribution needs to be given to the author, <author />.  This can be in the form of a textual
- * message at program startup or in documentation (online or textual) provided with the packaged software.
- * </agreement>
- */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 
-using ManagedFusion.Web.Controls;
+using  ManagedFusion.Web.Mvc.Controls;
 
-namespace ManagedFusion.Web
+namespace ManagedFusion.Web.Mvc
 {
 	/// <summary>
 	/// 
@@ -56,7 +38,7 @@ namespace ManagedFusion.Web
 		/// <summary>
 		/// Called when [action executed].
 		/// </summary>
-		/// <param name="filterContext">The filter context.</param>
+		/// <param name="filterContext">The filter filterContext.</param>
 		public override void  OnActionExecuting(FilterExecutingContext filterContext)
 		{
 			// make sure the captcha valid key is not contained in the route data
