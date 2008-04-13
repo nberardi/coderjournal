@@ -1,116 +1,17 @@
-﻿/** 
- * Copyright (C) 2007-2008 Nicholas Berardi, Managed Fusion, LLC (nick@managedfusion.com)
- * 
- * <author>Nicholas Berardi</author>
- * <author_email>nick@managedfusion.com</author_email>
- * <company>Managed Fusion, LLC</company>
- * <product>ASP.NET MVC CAPTCHA</product>
- * <license>Microsoft Public License (Ms-PL)</license>
- * <agreement>
- * This software, as defined above in <product />, is copyrighted by the <author /> and the <company /> 
- * and is licensed for use under <license />, all defined above.
- * 
- * This copyright notice may not be removed and if this <product /> or any parts of it are used any other
- * packaged software, attribution needs to be given to the author, <author />.  This can be in the form of a textual
- * message at program startup or in documentation (online or textual) provided with the packaged software.
- * </agreement>
- */
-
-using System;
+﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Web;
 using System.Text;
 
-namespace ManagedFusion.Web.Controls
+namespace ManagedFusion.Web.Mvc.Controls
 {
-	/// <summary>
-	/// Amount of random font warping to apply to rendered text
-	/// </summary>
-	public enum FontWarpFactor
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		None,
-		/// <summary>
-		/// 
-		/// </summary>
-		Low,
-		/// <summary>
-		/// 
-		/// </summary>
-		Medium,
-		/// <summary>
-		/// 
-		/// </summary>
-		High,
-		/// <summary>
-		/// 
-		/// </summary>
-		Extreme
-	}
-
-	/// <summary>
-	/// Amount of background noise to add to rendered image
-	/// </summary>
-	public enum BackgroundNoiseLevel
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		None,
-		/// <summary>
-		/// 
-		/// </summary>
-		Low,
-		/// <summary>
-		/// 
-		/// </summary>
-		Medium,
-		/// <summary>
-		/// 
-		/// </summary>
-		High,
-		/// <summary>
-		/// 
-		/// </summary>
-		Extreme
-	}
-
-	/// <summary>
-	/// Amount of curved line noise to add to rendered image
-	/// </summary>
-	public enum LineNoiseLevel
-	{
-		/// <summary>
-		/// 
-		/// </summary>
-		None,
-		/// <summary>
-		/// 
-		/// </summary>
-		Low,
-		/// <summary>
-		/// 
-		/// </summary>
-		Medium,
-		/// <summary>
-		/// 
-		/// </summary>
-		High,
-		/// <summary>
-		/// 
-		/// </summary>
-		Extreme
-	}
-
 	/// <summary>
 	/// CAPTCHA Image
 	/// </summary>
 	/// <seealso href="http://www.codinghorror.com">Original By Jeff Atwood</seealso>
-	public class CaptchaImage
+	internal class CaptchaImage
 	{
 		#region Static
 
@@ -327,7 +228,7 @@ namespace ManagedFusion.Web.Controls
 		/// Returns a GraphicsPath containing the specified string and font
 		/// </summary>
 		/// <param name="s">The s.</param>
-		/// <param name="f">The f.</param>
+		/// <param name="function">The function.</param>
 		/// <param name="r">The r.</param>
 		/// <returns></returns>
 		private GraphicsPath TextPath(string s, Font f, Rectangle r)

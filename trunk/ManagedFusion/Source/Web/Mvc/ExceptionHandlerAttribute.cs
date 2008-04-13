@@ -1,21 +1,4 @@
-/** 
- * Copyright (C) 2007-2008 Nicholas Berardi, Managed Fusion, LLC (nick@managedfusion.com)
- * 
- * <author>Nicholas Berardi</author>
- * <author_email>nick@managedfusion.com</author_email>
- * <company>Managed Fusion, LLC</company>
- * <license>Microsoft Public License (Ms-PL)</license>
- * <agreement>
- * This software, as defined above in <product />, is copyrighted by the <author /> and the <company /> 
- * and is licensed for use under <license />, all defined above.
- * 
- * This copyright notice may not be removed and if this <product /> or any parts of it are used any other
- * packaged software, attribution needs to be given to the author, <author />.  This can be in the form of a textual
- * message at program startup or in documentation (online or textual) provided with the packaged software.
- * </agreement>
- */
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +11,6 @@ namespace ManagedFusion.Web.Mvc
 	/// <summary>
 	/// 
 	/// </summary>
-	[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
 	public class ExceptionHandlerAttribute : ActionFilterAttribute
 	{
 		/// <summary>
@@ -100,7 +82,7 @@ namespace ManagedFusion.Web.Mvc
 		/// <summary>
 		/// Called when [action executed].
 		/// </summary>
-		/// <param name="filterContext">The filter context.</param>
+		/// <param name="filterContext">The filter filterContext.</param>
 		public override void OnActionExecuted(FilterExecutedContext filterContext)
 		{
 			Exception exception = filterContext.Exception;
@@ -133,8 +115,9 @@ namespace ManagedFusion.Web.Mvc
 						filterContext.HttpContext.Response.Write("<h2>" + ResponseDescription + "</h2>");
 						filterContext.HttpContext.Response.Write("<p>" + (exception.InnerException ?? exception).Message + "</p>");
 						filterContext.HttpContext.Response.Write("</body></html>");
+						filterContext.HttpContext.Response.Flush();
 
-						filterContext.HttpContext.Response.End();
+						filterContext.HttpContext.ApplicationInstance.CompleteRequest();
 					}
 				}
 			}

@@ -1,36 +1,43 @@
-﻿/** 
- * Copyright (C) 2007-2008 Nicholas Berardi, Managed Fusion, LLC (nick@managedfusion.com)
- * 
- * <author>Nicholas Berardi</author>
- * <author_email>nick@managedfusion.com</author_email>
- * <company>Managed Fusion, LLC</company>
- * <product>ASP.NET MVC CAPTCHA</product>
- * <license>Microsoft Public License (Ms-PL)</license>
- * <agreement>
- * This software, as defined above in <product />, is copyrighted by the <author /> and the <company /> 
- * and is licensed for use under <license />, all defined above.
- * 
- * This copyright notice may not be removed and if this <product /> or any parts of it are used any other
- * packaged software, attribution needs to be given to the author, <author />.  This can be in the form of a textual
- * message at program startup or in documentation (online or textual) provided with the packaged software.
- * </agreement>
- */
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Globalization;
+using System.IO;
 using System.Text;
-using System.Web;
-using System.Web.Mvc;
 using System.Web.Caching;
-using System.Web.Routing;
+using System.Web.Compilation;
 
-using ManagedFusion.Web.Controls;
+using  ManagedFusion.Web.Mvc.Controls;
 
 namespace System.Web.Mvc
 {
-	public static class CaptchaHelper
+	/// <summary>
+	/// 
+	/// </summary>
+	public static class HtmlHelperExtension
 	{
+		/// <summary>
+		/// Ifs the specified response.
+		/// </summary>
+		/// <param name="response">The response.</param>
+		/// <param name="condition">if set to <see langword="true"/> [condition].</param>
+		/// <param name="function">The function.</param>
+		/// <returns></returns>
+		public static ManagedFusion.If<string> If(this HtmlHelper helper, bool condition, Func<string> function)
+		{
+			return new ManagedFusion.If<string>(condition, function);
+		}
+
+		/// <summary>
+		/// Switches the specified response.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="response">The response.</param>
+		/// <param name="type">The type.</param>
+		/// <returns></returns>
+		public static ManagedFusion.Switch<T, string> Switch<T>(this HtmlHelper helper, T type)
+		{
+			return new ManagedFusion.Switch<T, string>(type);
+		}
+
 		/// <summary>
 		/// Captchas the text box.
 		/// </summary>
@@ -40,9 +47,9 @@ namespace System.Web.Mvc
 		public static string CaptchaTextBox(this HtmlHelper helper, string name)
 		{
 			return String.Format(@"<input type=""text"" id=""{0}"" name=""{0}"" value="""" maxlength=""{1}"" autocomplete=""off"" />",
-				name,
-				ManagedFusion.Web.Controls.CaptchaImage.TextLength
-				);
+					name,
+					ManagedFusion.Web.Mvc.Controls.CaptchaImage.TextLength
+					);
 
 		}
 
@@ -66,7 +73,7 @@ namespace System.Web.Mvc
 				image.UniqueId,
 				image,
 				null,
-				DateTime.Now.AddSeconds(ManagedFusion.Web.Controls.CaptchaImage.CacheTimeOut),
+				DateTime.Now.AddSeconds(ManagedFusion.Web.Mvc.Controls.CaptchaImage.CacheTimeOut),
 				Cache.NoSlidingExpiration,
 				CacheItemPriority.NotRemovable,
 				null);
