@@ -7,7 +7,7 @@ using System.Web.Routing;
 
 namespace System.Web.Mvc
 {
-	public static class ControllerContextExtensions
+	public static class MvcExtensions
 	{
 		/// <summary>
 		/// Redirects to action.
