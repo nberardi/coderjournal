@@ -5,6 +5,10 @@ using System.Web.Mvc;
 
 namespace ManagedFusion.Web.Mvc
 {
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <seealso href="http://weblogs.asp.net/rashid/archive/2008/03/28/asp-net-mvc-action-filter-caching-and-compression.aspx">Original Source by Kazi Manzur Rashid</seealso>
 	public class CompressAttribute : ActionFilterAttribute
 	{
 		/// <summary>
