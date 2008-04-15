@@ -115,9 +115,7 @@ namespace ManagedFusion.Web.Mvc
 						filterContext.HttpContext.Response.Write("<h2>" + ResponseDescription + "</h2>");
 						filterContext.HttpContext.Response.Write("<p>" + (exception.InnerException ?? exception).Message + "</p>");
 						filterContext.HttpContext.Response.Write("</body></html>");
-						filterContext.HttpContext.Response.Flush();
-
-						filterContext.HttpContext.ApplicationInstance.CompleteRequest();
+						filterContext.HttpContext.Response.End();
 					}
 				}
 			}
